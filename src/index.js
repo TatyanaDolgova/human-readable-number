@@ -37,6 +37,31 @@ module.exports = function toReadable (number) {
   }
 
   function numberToStringTens (num) {
+    if (tens === 1) {
+      let res = '';
+      if (unit === 1) {
+        res = ' eleven';
+      } else if (unit === 2){
+        res = ' twelve';
+      } else if (unit === 3){
+        res = ' thirteen';
+      } else if (unit === 4){
+        res = ' fourteen';
+      } else if (unit === 5){
+        res = ' fifteen';
+      } else if (unit === 6){
+        res = ' sixteen';
+      } else if (unit === 7){
+        res = ' seventeen';
+      } else if (unit === 8){
+        res = ' eighteen';
+      } else if (unit === 9){
+        res = ' nineteen';
+      } else if (unit === 0){
+        res = ' ten';
+      }
+      return res;
+    }
     switch(num) {
       
       case 2:
@@ -58,6 +83,7 @@ module.exports = function toReadable (number) {
     }
   }
 
+
   let strHundreds = numberToString(hundreds);
   let strTens = numberToStringTens(tens);
   let strUnit = numberToString(unit);
@@ -66,20 +92,26 @@ module.exports = function toReadable (number) {
     strTens = '';
   }
 
-  if(tens === 1) {
-    
-  }
+  
 
   if(arr.length === 3) {
-    result = `${strHundreds.slice(1)} hundred${strTens}${strUnit}`;
+    if (tens === 1) {
+      result = `${strHundreds} hundred${strTens}`;
+    }  else {
+      result = `${strHundreds} hundred${strTens}${strUnit}`;
+    }
   }
 
   if(arr.length === 2) {
-    result = `${strTens}${strUnit}`;
+    if (tens === 1) {
+      result = strTens;
+    }  else {
+      result = `${strTens}${strUnit}`;
+    }
   }
   
-  if(arr.lenth === 1) {
-    result = `${strUnit}`;
+  if(arr.length === 1) {
+    result = strUnit;
   }
 
   return result.trim();
